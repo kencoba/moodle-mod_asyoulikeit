@@ -1,0 +1,127 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_asyoulikeit/submission_list
+
+    Lists all submissions for one assignment, with a like/revoke/visibility control per row.
+
+    Context variables required for this template:
+    * actionurl - string
+    * sesskey - string
+    * rows - array, each: id (int), title (string), content (string, already formatted),
+      comment (string|null, already formatted), authorname (string), visibilitylabel (string),
+      likecountlabel (string), isown (bool), canlike (bool), mylikeid (int|null),
+      isprivate (bool), ispublic (bool), attachments (array of {filename, url}),
+      hasattachments (bool), editurl (string|null)
+
+    Example context (json):
+    {
+        "actionurl": "https://example.org/mod/asyoulikeit/view.php?id=2",
+        "sesskey": "abcdef1234",
+        "rows": [
+            {
+                "id": 1,
+                "title": "君の名を木々に",
+                "content": "森の木という木に、僕は君の名を刻みつける。",
+                "comment": "ロザリンドへ。",
+                "authorname": "オーランド",
+                "visibilitylabel": "非公開",
+                "likecountlabel": "Like数: 1",
+                "isown": false,
+                "canlike": true,
+                "mylikeid": null,
+                "isprivate": true,
+                "ispublic": false,
+                "attachments": [{"filename": "song.pdf", "url": "https://example.org/pluginfile.php/..."}],
+                "hasattachments": true,
+                "editurl": null
+            }
+        ]
+    }
+}}
+<div class="asyoulikeit-submissions">
+{{#rows}}
+    <div class="asyoulikeit-submission card mb-3 p-3">
+        <h5>{{title}}</h5>
+        <p class="text-muted mb-1">{{authorname}} &mdash; {{visibilitylabel}}</p>
+        <p>{{{content}}}</p>
+        {{#comment}}
+            <p class="asyoulikeit-comment"><em>{{{comment}}}</em></p>
+        {{/comment}}
+        {{#hasattachments}}
+            <ul class="asyoulikeit-attachments">
+            {{#attachments}}
+                <li><a href="{{{url}}}">{{filename}}</a></li>
+            {{/attachments}}
+            </ul>
+        {{/hasattachments}}
+        <p class="asyoulikeit-like-count">{{likecountlabel}}</p>
+
+        {{#canlike}}
+        <form method="post" action="{{{actionurl}}}" class="d-inline">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <input type="hidden" name="action" value="like">
+            <input type="hidden" name="submissionid" value="{{id}}">
+            <button type="submit" class="btn btn-outline-primary btn-sm">
+                {{#str}} givelike, mod_asyoulikeit {{/str}}
+            </button>
+        </form>
+        {{/canlike}}
+
+        {{#mylikeid}}
+        <form method="post" action="{{{actionurl}}}" class="d-inline">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <input type="hidden" name="action" value="revoke">
+            <input type="hidden" name="likeid" value="{{mylikeid}}">
+            <button type="submit" class="btn btn-outline-secondary btn-sm">
+                {{#str}} revokelike, mod_asyoulikeit {{/str}}
+            </button>
+        </form>
+        {{/mylikeid}}
+
+        {{#isown}}
+        <form method="post" action="{{{actionurl}}}" class="d-inline ml-2">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <input type="hidden" name="action" value="changevisibility">
+            <input type="hidden" name="submissionid" value="{{id}}">
+            <select name="visibility" onchange="this.form.submit()">
+                <option value="private" {{#isprivate}}selected{{/isprivate}}>
+                    {{#str}} visibilityprivate, mod_asyoulikeit {{/str}}
+                </option>
+                <option value="public" {{#ispublic}}selected{{/ispublic}}>
+                    {{#str}} visibilitypublic, mod_asyoulikeit {{/str}}
+                </option>
+            </select>
+        </form>
+
+        <a href="{{{editurl}}}" class="btn btn-outline-secondary btn-sm">
+            {{#str}} edit, mod_asyoulikeit {{/str}}
+        </a>
+
+        <form method="post" action="{{{actionurl}}}" class="d-inline"
+                onsubmit="return confirm('{{#str}} confirmdelete, mod_asyoulikeit {{/str}}')">
+            <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="submissionid" value="{{id}}">
+            <button type="submit" class="btn btn-outline-danger btn-sm">
+                {{#str}} delete, mod_asyoulikeit {{/str}}
+            </button>
+        </form>
+        {{/isown}}
+    </div>
+{{/rows}}
+</div>

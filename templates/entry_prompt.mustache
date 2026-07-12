@@ -1,0 +1,52 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_asyoulikeit/entry_prompt
+
+    Prompts a not-yet-entered user to enter the assignment, or shows their remaining like
+    count once they have.
+
+    Context variables required for this template:
+    * isentered - bool
+    * remaininglikes - int|null
+    * actionurl - string
+    * sesskey - string
+
+    Example context (json):
+    {
+        "isentered": true,
+        "remaininglikes": 5,
+        "actionurl": "https://example.org/mod/asyoulikeit/view.php?id=2",
+        "sesskey": "abcdef1234"
+    }
+}}
+<div class="asyoulikeit-entry-prompt mb-3">
+{{#isentered}}
+    <p class="asyoulikeit-remaining-likes">
+        {{#str}} remaininglikes, mod_asyoulikeit, {{remaininglikes}} {{/str}}
+    </p>
+{{/isentered}}
+{{^isentered}}
+    <form method="post" action="{{{actionurl}}}">
+        <input type="hidden" name="sesskey" value="{{{sesskey}}}">
+        <input type="hidden" name="action" value="enter">
+        <button type="submit" class="btn btn-primary">
+            {{#str}} enter, mod_asyoulikeit {{/str}}
+        </button>
+    </form>
+{{/isentered}}
+</div>

@@ -1,0 +1,24 @@
+{
+    "name": "asyoulikeit/moodle-plugin-fast-tests",
+    "description": "Moodle-free unit tests for the mod_asyoulikeit domain layer (classes/local/domain).",
+    "license": "GPL-3.0-or-later",
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "mod_asyoulikeit\\local\\domain\\": "../classes/local/domain/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "mod_asyoulikeit\\tests\\fast\\": "local/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "config": {
+        "sort-packages": true
+    }
+}

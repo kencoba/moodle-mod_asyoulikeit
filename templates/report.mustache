@@ -1,0 +1,70 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template mod_asyoulikeit/report
+
+    Reviewer report table: one row per participant per submission, or a single
+    "not submitted" row for a participant who entered but has not submitted.
+
+    Context variables required for this template:
+    * rows - array, each: participant (string), issubmitted (bool), statuslabel (string),
+      visibilitylabel (string), lastmodified (string), likecountlabel (string)
+
+    Example context (json):
+    {
+        "rows": [
+            {
+                "participant": "オーランド",
+                "issubmitted": true,
+                "statuslabel": "提出済み",
+                "visibilitylabel": "非公開",
+                "lastmodified": "12 July 2026, 10:03 AM",
+                "likecountlabel": "Likes💙: 1"
+            },
+            {
+                "participant": "ロザリンド",
+                "issubmitted": false,
+                "statuslabel": "未提出",
+                "visibilitylabel": "",
+                "lastmodified": "",
+                "likecountlabel": ""
+            }
+        ]
+    }
+}}
+<table class="table asyoulikeit-report">
+    <thead>
+        <tr>
+            <th>{{#str}} participant, mod_asyoulikeit {{/str}}</th>
+            <th>{{#str}} submissionstatus, mod_asyoulikeit {{/str}}</th>
+            <th>{{#str}} submissionvisibility, mod_asyoulikeit {{/str}}</th>
+            <th>{{#str}} lastmodified, mod_asyoulikeit {{/str}}</th>
+            <th>{{#str}} likecountheader, mod_asyoulikeit {{/str}}</th>
+        </tr>
+    </thead>
+    <tbody>
+    {{#rows}}
+        <tr class="{{^issubmitted}}asyoulikeit-report-notsubmitted{{/issubmitted}}">
+            <td>{{participant}}</td>
+            <td>{{statuslabel}}</td>
+            <td>{{visibilitylabel}}</td>
+            <td>{{lastmodified}}</td>
+            <td>{{likecountlabel}}</td>
+        </tr>
+    {{/rows}}
+    </tbody>
+</table>

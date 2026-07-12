@@ -1,0 +1,4 @@
+/tests-fast/vendor/
+/tests-fast/.phpunit.result.cache
+/moodledata/
+*.log
