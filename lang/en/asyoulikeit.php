@@ -70,6 +70,7 @@ $string['selflikeerror'] = 'You cannot like your own submission.';
 $string['submissionattachments'] = 'Attachments';
 $string['submissioncomment'] = 'Comment (optional)';
 $string['submissioncontent'] = 'Content';
+$string['submissionheader'] = 'New submission';
 $string['submissionstatus'] = 'Status';
 $string['submissiontitle'] = 'Title';
 $string['submissionvisibility'] = 'Visibility';

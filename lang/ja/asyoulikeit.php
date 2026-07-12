@@ -70,6 +70,7 @@ $string['selflikeerror'] = '自分の提出にLikeはできません。';
 $string['submissionattachments'] = '添付ファイル';
 $string['submissioncomment'] = 'コメント(任意)';
 $string['submissioncontent'] = '説明';
+$string['submissionheader'] = '提出フォーム';
 $string['submissionstatus'] = '状況';
 $string['submissiontitle'] = 'タイトル';
 $string['submissionvisibility'] = '公開設定';

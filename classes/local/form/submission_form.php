@@ -36,7 +36,7 @@ class submission_form extends \moodleform {
     public function definition() {
         $mform = $this->_form;
 
-        $mform->addElement('header', 'submissionheader', get_string('submitwork', 'mod_asyoulikeit'));
+        $mform->addElement('header', 'submissionheader', get_string('submissionheader', 'mod_asyoulikeit'));
 
         // 0 means "creating a new submission"; view.php sets this to a real id when editing.
         $mform->addElement('hidden', 'submissionid', 0);
