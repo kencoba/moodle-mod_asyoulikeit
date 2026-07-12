@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'mod_asyoulikeit';
-$plugin->version    = 2026071301;
+$plugin->version    = 2026071302;
 $plugin->requires    = 2024100700; // Moodle 4.5.0 (MOODLE_405_STABLE).
 $plugin->maturity    = MATURITY_ALPHA;
-$plugin->release    = '0.3.0';
+$plugin->release    = '0.4.0';

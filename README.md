@@ -51,8 +51,6 @@ checked out at `mod/asyoulikeit` inside the Moodle codebase the containers mount
 
 ## Known limitations
 
-- **No backup/restore support** (`backup/moodle2/`). This is required before the plugin could
-  be submitted to the official Moodle Plugins directory; it's tracked as follow-up work.
 - Targets Moodle 4.5 LTS only; the `public/` directory restructure introduced in Moodle 5.1+
   is not accounted for.
 - No grading integration (`FEATURE_GRADE_HAS_GRADE` is `false`) — likes are peer feedback, not
