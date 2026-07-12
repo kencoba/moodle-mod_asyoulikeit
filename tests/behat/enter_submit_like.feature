@@ -26,8 +26,9 @@ Feature: Enter, submit and like in an AsYouLikeIt activity
     And I am on the "Song" "asyoulikeit activity" page
     And I press "Enter this assignment"
     And I set the following fields to these values:
-      | Title   | My song  |
-      | Content | La la la |
+      | Title      | My song  |
+      | Content    | La la la |
+      | Visibility | Public   |
     And I press "Submit your work"
     Then I should see "My song"
     And I log out
@@ -35,6 +36,6 @@ Feature: Enter, submit and like in an AsYouLikeIt activity
     And I am on the "Song" "asyoulikeit activity" page
     And I press "Enter this assignment"
     And I press "Like"
-    Then I should see "Likes: 1"
+    Then I should see "Likes💙: 1"
     And I press "Revoke like"
-    Then I should see "Likes: 0"
+    Then I should see "Likes💙: 0"
