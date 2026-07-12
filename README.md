@@ -49,10 +49,13 @@ Local development and manual testing use
 (`MOODLE_405_STABLE`). See that project's README for the general setup; this plugin is
 checked out at `mod/asyoulikeit` inside the Moodle codebase the containers mount.
 
+Manually verified against Moodle 5.1 as well (install, submit/edit/delete, like/revoke,
+attachments, the reviewer report, and backup/restore all work unchanged) — the `public/`
+directory restructure introduced in 5.1 only affects web server configuration, not plugin
+code, since this plugin only ever addresses paths via `$CFG->dirroot`/`__DIR__`.
+
 ## Known limitations
 
-- Targets Moodle 4.5 LTS only; the `public/` directory restructure introduced in Moodle 5.1+
-  is not accounted for.
 - No grading integration (`FEATURE_GRADE_HAS_GRADE` is `false`) — likes are peer feedback, not
   a grade.
 - Multiple submissions per participant per assignment are allowed by design (not restricted to
